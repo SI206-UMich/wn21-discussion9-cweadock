@@ -17,9 +17,11 @@ def getCharmanderLink(soup):
 # Task 2: Get the details from the box below "Egg moves". Get all the move names and store
 #         them into a list. The function should return that list of moves.
 def getEggMoves(pokemon):
-    url = 'https://pokemondb.net/pokedex/'+pokemon
     moves = []
-    tags = self.soup.find_all('table', class_ = 'data-table')
+    url = 'https://pokemondb.net/pokedex/'+pokemon
+    r = requests.get(url)
+    soup = BeautifulSoup(r.text, 'html.parser')
+    tags = soup.find_all('table', class_ = 'data-table')
     tr_tags = tags.find_all("tr")
     for i in tr_tags:
         moves.append(i)
